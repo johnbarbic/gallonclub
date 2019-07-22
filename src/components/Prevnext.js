@@ -1,9 +1,26 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import { FaArrowRight } from 'react-icons/fa'
 import { FaArrowLeft } from 'react-icons/fa'
 
 class PrevNext extends React.Component {
+  componentDidMount = () => {
+    document.addEventListener('keydown', this.handleShortcuts)
+  }
+  handleShortcuts = e => {
+    const { previous, next } = this.props.pageContext
+    if (e.keyCode === 37) {
+      //left
+      //alert('left')
+      navigate(previous.fields.slug)
+    }
+    if (e.keyCode === 39)
+      //right
+      navigate(next.fields.slug)
+    //alert('right')
+  }
+
   render() {
     const { previous, next } = this.props.pageContext
     //console.log(this.props)
